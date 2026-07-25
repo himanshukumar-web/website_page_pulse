@@ -49,7 +49,7 @@ Analyze any website URL and get a comprehensive SEO report — instantly.
 ### 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone <https://github.com/himanshukumar-web/website_page_pulse.git>
 cd page-pulse
 ```
 
