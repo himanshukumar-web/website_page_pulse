@@ -3,7 +3,7 @@
 ## Base URL
 
 ```
-Production : https://<your-render-url>
+Production : https://page-pulse-api.onrender.com
 Development: http://localhost:5000
 ```
 

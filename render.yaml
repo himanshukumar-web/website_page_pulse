@@ -11,6 +11,6 @@ services:
       - key: PORT
         value: 10000
       - key: REQUEST_TIMEOUT
-        value: 10000
+        value: 30000
       - key: CORS_ORIGIN
         value: "*"

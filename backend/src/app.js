@@ -11,6 +11,9 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
+// Trust proxy header when running behind reverse proxies like Render
+app.set('trust proxy', 1);
+
 // --------------- Security & Performance Middlewares ---------------
 
 // Security headers with relaxed cross-origin resource policy for public API
@@ -29,36 +32,48 @@ const allowedOriginsList = CORS_ORIGIN && CORS_ORIGIN !== '*'
   : ['*'];
 
 const devOrigins = [
+  'http://localhost:5173',
   'http://localhost:3000',
   'http://localhost:5000',
+  'http://127.0.0.1:5173',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:5000',
 ];
 
+const isAllowedOrigin = (origin) => {
+  // Allow non-browser calls (like cURL, mobile native apps, server-to-server)
+  if (!origin) return true;
+
+  // Wildcard allowed
+  if (allowedOriginsList.includes('*')) return true;
+
+  // Exact match in configured CORS_ORIGIN list
+  if (allowedOriginsList.includes(origin)) return true;
+
+  // Dev server origins
+  if (devOrigins.includes(origin)) return true;
+
+  // Production Vercel main domain & preview deployments (*.vercel.app)
+  if (/^https:\/\/([a-zA-Z0-9-]+\.)*vercel\.app$/.test(origin)) return true;
+
+  return false;
+};
+
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow non-browser calls (like cURL, mobile apps, server-to-server)
-    if (!origin) return callback(null, true);
-
-    if (
-      allowedOriginsList.includes('*') ||
-      allowedOriginsList.includes(origin) ||
-      (NODE_ENV !== 'production' && devOrigins.includes(origin))
-    ) {
+    if (isAllowedOrigin(origin)) {
       return callback(null, true);
     }
-
-    const corsError = new Error(`CORS policy: Origin ${origin} is not allowed`);
-    corsError.statusCode = HTTP_STATUS.BAD_REQUEST;
-    return callback(corsError);
+    return callback(null, false);
   },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   credentials: true,
   optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '1mb' }));
 
 // Request logging — 'dev' for development, 'combined' for production
