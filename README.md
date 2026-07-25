@@ -79,8 +79,9 @@
 
 Explore the live production deployment of Page Pulse:
 
-- 🚀 **Frontend App (Vercel)**: [https://page-pulse.vercel.app](https://page-pulse.vercel.app) *(Placeholder)*
-- ⚙️ **Backend API (Render)**: [https://page-pulse-api.onrender.com](https://page-pulse-api.onrender.com) *(Placeholder)*
+- 🚀 **Frontend App (Vercel)**: [https://frontend-drab-alpha-72.vercel.app](https://frontend-drab-alpha-72.vercel.app)
+- ⚙️ **Backend API (Render)**: [https://page-pulse-api.onrender.com](https://page-pulse-api.onrender.com)
+
 
 ---
 
