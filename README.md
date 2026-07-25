@@ -629,26 +629,50 @@ Time:        8.12s
 
 ## 🚀 Production Deployment
 
-### Frontend (Vercel)
+### ⚙️ Backend Deployment (Render)
 
-1. Import the repository into your **Vercel Dashboard**.
-2. Set the **Root Directory** to `frontend`.
-3. Framework Preset: **Vite**.
-4. Configure Environment Variable:
-   - `VITE_API_URL` = `https://your-backend-render-url.onrender.com`
-5. Click **Deploy**.
+Render automatically detects the `render.yaml` configuration or can be configured manually via the Render Dashboard.
 
-### Backend (Render)
+#### Render Service Settings
+- **Service Type**: Web Service
+- **Root Directory**: `backend`
+- **Environment / Runtime**: `Node`
+- **Build Command**: `npm install`
+- **Start Command**: `npm start`
 
-1. Create a new **Web Service** on **Render**.
-2. Connect your repository and set the **Root Directory** to `backend`.
-3. Runtime: **Node**.
-4. Build Command: `npm install`.
-5. Start Command: `npm start`.
-6. Add Environment Variables:
-   - `NODE_ENV` = `production`
-   - `CORS_ORIGIN` = `https://your-frontend-vercel-url.vercel.app`
-7. Click **Create Web Service**.
+#### Render Environment Variables
+| Key | Value | Description |
+| :--- | :--- | :--- |
+| `NODE_ENV` | `production` | Enables production mode & error handling |
+| `PORT` | `10000` | Port bound by Render |
+| `REQUEST_TIMEOUT` | `10000` | URL fetching timeout in ms |
+| `CORS_ORIGIN` | `https://YOUR-VERCEL-DOMAIN.vercel.app` | Allowed frontend origin |
+
+---
+
+### ⚛️ Frontend Deployment (Vercel)
+
+Vercel automatically builds the React SPA using Vite and rewrites routes via `vercel.json`.
+
+#### Vercel Project Settings
+- **Framework Preset**: `Vite`
+- **Root Directory**: `frontend`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+
+#### Vercel Environment Variables
+| Key | Value | Description |
+| :--- | :--- | :--- |
+| `VITE_API_URL` | `https://YOUR-RENDER-DOMAIN.onrender.com` | Live backend API URL |
+
+---
+
+#### 📋 Automated Infrastructure as Code (IaC)
+
+This repository includes pre-configured deployment manifests:
+- `render.yaml`: Automatically configures Render Web Service settings, runtime, and build commands.
+- `frontend/vercel.json`: Handles SPA client-side route rewrites so direct navigation never returns a 404.
+
 
 ---
 
