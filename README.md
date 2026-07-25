@@ -746,7 +746,7 @@ Contributions are welcome! Follow these steps to contribute:
 *Senior Full Stack Software Engineer*
 
 - **GitHub**: [@himanshukumar-web](https://github.com/himanshukumar-web)
-- **LinkedIn**: [Himanshu Kumar](www.linkedin.com/in/himanshu-kumar-813626327)
+- **LinkedIn**: [Himanshu Kumar](https://www.linkedin.com/in/himanshu-kumar-813626327/)
 
 ---
 
