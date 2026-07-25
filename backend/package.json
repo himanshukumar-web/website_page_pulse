@@ -1,0 +1,29 @@
+{
+  "name": "page-pulse-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Page Pulse — a modern SEO analysis tool",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --verbose --forceExit --detectOpenHandles",
+    "test:watch": "jest --watch --verbose",
+    "test:coverage": "jest --coverage --verbose --forceExit"
+  },
+  "keywords": ["seo", "analyzer", "express", "cheerio"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
+  }
+}
